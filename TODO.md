@@ -9,6 +9,7 @@
 
 ## Open
 
+- [ ] Repair and re-run the Linux and container CI jobs after the first public push.
 - [ ] Configure real Twitch credentials only in the ignored local `.env` file.
 
 ## Ideas / later

@@ -29,7 +29,7 @@ target_include_directories(twitchbot_core
 target_compile_features(twitchbot_core PUBLIC cxx_std_20)
 target_link_libraries(twitchbot_core PUBLIC nlohmann_json::nlohmann_json)
 
-find_package(Boost 1.74 REQUIRED COMPONENTS beast)
+find_package(Boost 1.74 REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 add_executable(twitch-chatbot
@@ -40,7 +40,7 @@ target_compile_features(twitch-chatbot PRIVATE cxx_std_20)
 target_link_libraries(twitch-chatbot
     PRIVATE
         twitchbot::core
-        Boost::beast
+        Boost::headers
         OpenSSL::SSL
         OpenSSL::Crypto
 )
