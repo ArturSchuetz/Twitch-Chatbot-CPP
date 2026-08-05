@@ -5,6 +5,7 @@ RUN apt-get update \
         ca-certificates \
         cmake \
         g++ \
+        make \
         libboost-all-dev \
         libssl-dev \
         nlohmann-json3-dev \
