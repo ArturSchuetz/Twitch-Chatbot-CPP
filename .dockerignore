@@ -1,0 +1,17 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+build
+build-*
+vcpkg_installed
+bin
+obj
+__pycache__
+*.pyc
+*.log
+*.exe
+*.dll
+*.obj
+*.pdb

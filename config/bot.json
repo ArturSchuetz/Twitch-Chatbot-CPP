@@ -1,0 +1,38 @@
+{
+  "messageRules": [
+    {
+      "enabled": false,
+      "sender": "inzpektorgadget",
+      "channel": "inzaynia",
+      "contains": "ACTION Die magische Dschibbst",
+      "response": "!nom 13",
+      "delaySeconds": 0,
+      "cooldownSeconds": 0
+    },
+    {
+      "enabled": false,
+      "sender": "inzpektorgadget",
+      "channel": "inzaynia",
+      "contains": "Emperor inzaynia is announcing a grand Tournament Arena.",
+      "response": "!joinarena",
+      "delaySeconds": 0,
+      "cooldownSeconds": 0
+    }
+  ],
+  "hype": {
+    "enabled": false,
+    "channel": "inzaynia",
+    "delaySeconds": 1,
+    "cooldownSeconds": 2,
+    "subscriptionMessages": [
+      "inzYay",
+      "inzYay inzYay",
+      "inzYay inzYay inzYay"
+    ],
+    "giftMessages": [
+      "inzGift",
+      "inzGift inzGift",
+      "inzGift inzGift inzGift"
+    ]
+  }
+}

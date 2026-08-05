@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "twitch-chatbot-cpp",
+  "version-semver": "1.0.0",
+  "description": "A secure C++20 Twitch IRC chatbot reconstructed from a legacy project.",
+  "homepage": "https://github.com/ArturSchuetz/Twitch-Chatbot-CPP",
+  "license": "MIT",
+  "builtin-baseline": "e3ed41868d5034bc608eaaa58383cd6ecdbb5ffb",
+  "dependencies": [
+    "boost-beast",
+    "nlohmann-json",
+    "openssl"
+  ]
+}

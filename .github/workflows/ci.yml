@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        compiler: [g++, clang++]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libboost-all-dev libssl-dev nlohmann-json3-dev
+      - name: Configure
+        run: >-
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler }}
+          -DBUILD_TESTING=ON
+          -DTWITCHBOT_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  windows:
+    runs-on: windows-2022
+    env:
+      VCPKG_ROOT: C:\vcpkg
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        shell: pwsh
+        run: cmake --preset windows-vcpkg -DTWITCHBOT_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        shell: pwsh
+        run: cmake --build --preset windows-release --parallel
+      - name: Test
+        shell: pwsh
+        run: ctest --preset windows-release
+
+  release-safety:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test release-safety scanner
+        run: python3 -m unittest tests/test_release_safety.py
+      - name: Reject credentials and generated/private artifacts
+        run: python3 scripts/check_release_safety.py
+
+  container:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t twitch-chatbot-cpp:ci .
+      - name: Validate container configuration
+        run: >-
+          docker run --rm
+          -e TWITCH_BOT_USERNAME=example_bot
+          -e TWITCH_OAUTH_TOKEN=example_token_for_ci_validation
+          -e TWITCH_CHANNELS=example_channel
+          twitch-chatbot-cpp:ci --check-config
