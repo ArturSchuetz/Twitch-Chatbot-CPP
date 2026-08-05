@@ -22,6 +22,8 @@
 
 ## Done
 
+- [x] Complete a live TLS/authentication Twitch IRC smoke test without enabling
+      automations or sending a chat message.
 - [x] Create the empty GitHub repository and prepare the local initial commit.
 - [x] Run the complete pre-push build, test, license, credential, artifact, and
       committed-whitespace audit.

@@ -69,6 +69,12 @@ Edit `.env`, validate it without connecting, then start the bot:
 If your OpenSSL installation has no default CA location, set `SSL_CERT_FILE` to a
 trusted CA bundle. Never disable certificate verification.
 
+For a standard Git for Windows installation, a typical command is:
+
+```powershell
+$env:SSL_CERT_FILE = "C:\Program Files\Git\mingw64\etc\ssl\certs\ca-bundle.crt"
+```
+
 ## Quick start on Ubuntu
 
 ```bash

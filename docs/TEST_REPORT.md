@@ -17,6 +17,12 @@ Date: 2026-08-05
   force-added `build/bin/obj` content and an extensionless binary fixture.
 - `twitch-chatbot --check-config` accepted normalized dummy credentials and two
   channels without contacting Twitch.
+- A live Twitch IRC smoke test established TLS, completed authentication and
+  capability negotiation, and remained connected beyond the 20-second auth
+  timeout. Automations were disabled and no chat message was sent.
+- The local vcpkg OpenSSL build required `SSL_CERT_FILE` on Windows; the repeated
+  live test succeeded with the CA bundle supplied by Git for Windows. Certificate
+  verification remained enabled throughout.
 
 ## Test executable coverage
 
@@ -37,8 +43,6 @@ rather than a network-session test.
 - Linux GCC and Clang were not available on this Windows host. GitHub Actions
   defines both Linux builds in addition to the MSVC build; ClangCL was verified
   locally.
-- No live Twitch connection was attempted because the historical credentials must
-  be revoked and should not be reused for a new deployment.
 - No local fake-TLS integration server exercised socket handshake, certificate,
   timeout, cancellation, or reconnect orchestration; those paths remain covered by
   code review and the compiler/static-analysis passes only.
